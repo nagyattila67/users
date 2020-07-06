@@ -43,7 +43,7 @@ let loadData = function (along) {
         };
         if (along == 0) {
             loadButtonGroup(index = i);
-            loadSetDelButton(index = i); console.log("ALONG: ", along);
+            loadSetDelButton(index = i);
         }
     }
 };
@@ -119,7 +119,6 @@ function delUser(event, el) {
     //eltávolít egy felhasználót
     el = el.value;
     el = parseInt(el);
-    console.log("el= ", el);
     delUserInit = {
         method: "DELETE",
         mode: "cors",
@@ -130,24 +129,44 @@ function delUser(event, el) {
     if (confirm("Ön egy felhasználót fog törölni.")) fetch("http://localhost:3000/users/" + el, delUserInit)
         .then(data => data = data.json())
         .catch(err => console.log(er))
-        .then(data => { loadData(along = 0); loadButtonGroup; loadSetDelButton; })
-        .catch(data => console.log(er))
-
+        .then(data => { console.log("Felhasználó törlése megtörtént az adatbázisban. Kérem, frissítsen!"); clearTable(); })
+        .catch(er => console.log(er))
 };
+
+function clearTable() {
+    // törli a #t-users táblázat sorait
+    table = document.querySelector("#t-users");
+    rowItems = table.childElementCount;
+    rowItems = parseInt(rowItems);
+    for (let i = 0; i < rowItems; i++) {
+        table.removeChild(table.lastElementChild);
+    };
+    tr = document.querySelector("thead tr");
+    tr.removeChild(tr.lastElementChild);
+    //visszaállítja a főgombot a disabled állapotból
+    let mainButton=document.querySelector("#mainButton");
+    mainButton.removeAttribute("disabled");
+
+}
+
 function changeUserData(event, btn) {
     //btn = 'this' in onclick
     btnValue = btn["value"];
     btnValue = parseInt(btnValue);
-    console.log(btnValue);
     row = btn.parentElement.parentElement.parentElement;
-    console.log(row);
     for (let i = 0; i < 3; i++) { row.removeChild(row.children[3 - i]) };
 
     let mainbutton = document.querySelector("#mainButton");
     mainbutton.setAttribute("disabled", "")
 
+/*function createSetDelButtons(){
+
+}
+
+createSetDelButtons();
+*/
+
     btnGroupList = document.querySelectorAll(".btn-group");
-    console.log(btnGroupList);
     for (let k = 0; k < btnGroupList.length; k++) {
         btnGroupList[k].children[0].setAttribute("disabled", "");
         btnGroupList[k].children[1].setAttribute("disabled", "")
@@ -167,24 +186,24 @@ function changeUserData(event, btn) {
         'placeholder': `${pack[btnValue - 1]["email"]}`
     })
     col.appendChild(emailInput);
-    console.log(btnValue);
 
     col = createNewElement("td");
     row.appendChild(col);
-    btnGroup=createNewElement("div",{'class':'btn-group btn-group-sm','role':'group','aria-label':'Basic example'});
+    btnGroup = createNewElement("div", { 'class': 'btn-group btn-group-sm', 'role': 'group', 'aria-label': 'Basic example' });
     col.appendChild(btnGroup);
-    sendButton=createNewElement('button',{'type':'button','class':'btn btn-primary'});
+    sendButton = createNewElement('button', { 'type': 'button', 'class': 'btn btn-primary' });
     btnGroup.appendChild(sendButton);
-    sendButton.innerHTML='<i class="fa fa-wrench" aria-hidden="true"></i>';
-    cancelButton=createNewElement('button',{'type':'button','class':'btn btn-secondary'});
+    sendButton.innerHTML = '<i class="fa fa-wrench" aria-hidden="true"></i>';
+    cancelButton = createNewElement('button', { 'type': 'button', 'class': 'btn btn-secondary', 'onclick': 'clearTable(),loadData(along=0)' });
     btnGroup.appendChild(cancelButton);
-    cancelButton.innerHTML='<i class="fa fa-ban" aria-hidden="true"></i>';
+    cancelButton.innerHTML = '<i class="fa fa-ban" aria-hidden="true"></i>';
 
-/*<div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary">Left</button>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
-</div>*/
+
+    /*<div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary">Left</button>
+      <button type="button" class="btn btn-secondary">Middle</button>
+      <button type="button" class="btn btn-secondary">Right</button>
+    </div>*/
 
     /*
     form = createNewElement("form");
