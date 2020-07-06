@@ -1,9 +1,19 @@
 {
-  "users":[
-    {"id":1, "name":"Kovács János", "email":"kovacs@gmail.com"},
-    {"id":2, "name":"Szabó Piroska", "email":"szabo@gmail.com"},
-    {"id":3, "name":"Nagy Ferenc", "email":"nagy@gmail.com"},
-    {"id":4, "name":"Molnár János", "email":"molnar@gmail.com"},
-    {"id":5, "name":"Kiskunszeghalmi Ottó", "email":"kiskun@hotmail.com"}
-]
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
 }
