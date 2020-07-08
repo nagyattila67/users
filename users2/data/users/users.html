@@ -13,9 +13,9 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-2 bg-warning"></div>
-            <div class="col-8">
-                <div class="row">
+            <div class="col-sm-0 col-md-2 col-lg-3 col-xl-3 bg-warning"></div>
+            <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6 g">
+                <div  class="row justify-content-center">
                     <div class="col-2"></div>
                     <div class="col-8">
                         <button id="mainButton" type="button"
@@ -23,21 +23,48 @@
                     </div>
                     <div class="col-2"></div>
                 </div>
-                <div class="row" style="text-align:center">
-                    <table class="table table-striped table-hover">
-                        <thead>
+                <div id="new-user" class="row justify-content-center pt-3 bt-0 bm-0" style="display: none">
+                    <h5>
+                        <p class="text-muted" id="new-user-text">Új felhasználó</p>
+                    </h5>
+                    <table class="table m-0 p-0">
+                        <thead id="thead" class="text-center">
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr id="new-user-input"></tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="row justify-content-center pt-3">
+                    <h5>
+                        <p class="text-muted">Felhasználók</p>
+                    </h5>
+                </div>
+                <div class="row justify-content-center">
+                    <table class="table table-striped table-hover">
+                        <thead class="text-center">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th id="actions" style="display:none">Actions</th>
                             </tr>
                         </thead>
 
-                        <tbody id="t-users"></tbody>
+                        <tbody id="t-users">
+                        </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-2 bg-warning"></div>
+            <div class="col-sm-0 col-md-2 col-lg-3 col-xl-3 bg-warning"></div>
         </div>
     </div>
 </body>
